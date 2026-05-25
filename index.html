@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Campañas — Banco Internacional × Relif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:    #2563eb;
+    --blue-lt: #eff6ff;
+    --green:   #16a34a;
+    --green-lt:#f0fdf4;
+    --amber:   #d97706;
+    --amber-lt:#fffbeb;
+    --dark:    #0f172a;
+    --mid:     #475569;
+    --light:   #94a3b8;
+    --border:  #e2e8f0;
+    --bg:      #f8fafc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); font-size: 15px; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-brand { font-size: 0.88rem; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 0.5rem; }
+  .nav-brand span { color: var(--blue); }
+  .nav-date { font-size: 0.78rem; color: var(--light); font-weight: 500; }
+  .nav-tag {
+    font-size: 0.7rem; font-weight: 600; background: var(--blue-lt);
+    color: var(--blue); border-radius: 999px; padding: 0.2rem 0.7rem;
+    border: 1px solid #bfdbfe;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1d4ed8 100%);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04); border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -80px; left: -40px;
+    width: 250px; height: 250px;
+    background: rgba(255,255,255,0.03); border-radius: 50%;
+  }
+  .hero-tag {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #93c5fd; margin-bottom: 1rem;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px; padding: 0.25rem 0.9rem;
+  }
+  .hero h1 {
+    font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em;
+    color: white; line-height: 1.1; margin-bottom: 0.8rem;
+  }
+  .hero p {
+    font-size: 0.95rem; color: rgba(255,255,255,0.6);
+    max-width: 480px; margin: 0 auto;
+  }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--dark); margin-bottom: 0.4rem;
+  }
+  .section-sub {
+    font-size: 0.88rem; color: var(--mid); margin-bottom: 2rem; max-width: 560px;
+  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  /* CARDS GRID */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .cards-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem 1.3rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card.highlight { border-top: 3px solid var(--blue); }
+  .card.green     { border-top: 3px solid var(--green); }
+  .card.amber     { border-top: 3px solid var(--amber); }
+
+  .card-label {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--light); margin-bottom: 0.4rem;
+  }
+  .card-value {
+    font-size: 2rem; font-weight: 800; letter-spacing: -0.025em;
+    color: var(--dark); line-height: 1; margin-bottom: 0.3rem;
+  }
+  .card-value.blue  { color: var(--blue); }
+  .card-value.green { color: var(--green); }
+  .card-value.amber { color: var(--amber); }
+  .card-sub { font-size: 0.78rem; color: var(--mid); line-height: 1.4; }
+
+  /* CALLOUT */
+  .callout {
+    border-radius: 12px; padding: 1.1rem 1.3rem;
+    display: flex; gap: 0.8rem; align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .callout.blue  { background: var(--blue-lt);  border: 1px solid #bfdbfe; }
+  .callout.green { background: var(--green-lt); border: 1px solid #bbf7d0; }
+  .callout.amber { background: var(--amber-lt); border: 1px solid #fde68a; }
+  .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .callout-text { font-size: 0.85rem; color: var(--dark); line-height: 1.6; }
+  .callout-text strong { font-weight: 700; }
+
+  /* PROGRESS BAR */
+  .progress-wrap { margin: 1.5rem 0; }
+  .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; color: var(--mid); margin-bottom: 0.4rem;
+  }
+  .progress-label strong { color: var(--dark); font-weight: 700; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 999px; transition: width 1s ease; }
+  .progress-fill.blue  { background: var(--blue); }
+  .progress-fill.green { background: var(--green); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--light);
+  }
+  footer strong { color: var(--mid); }
+
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .cards-2 { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Banco Internacional <span>× Relif</span></div>
+  <div style="display:flex;align-items:center;gap:0.8rem">
+    <span class="nav-date">Mayo 2026</span>
+    <span class="nav-tag">Reporte de Campañas</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Reporte ejecutivo · Mayo 2026</div>
+  <h1>Resultados de Campañas<br>Banco Internacional</h1>
+  <p>Resumen de actividad y resultados de las campañas activas en el mes de mayo.</p>
+</div>
+
+<div class="container">
+
+  <!-- CAMPAÑA 1 -->
+  <div class="section-label">Campaña 1</div>
+  <div class="section-title">Carrito Abandonado 3</div>
+  <div class="section-sub">Retoma de clientes con crédito iniciado y no completado. Quedan 7 días de mes.</div>
+
+  <div class="cards">
+    <div class="card green">
+      <div class="card-label">Créditos vendidos</div>
+      <div class="card-value green">3</div>
+      <div class="card-sub">Con una semana aún por delante</div>
+    </div>
+    <div class="card amber">
+      <div class="card-label">En evaluación</div>
+      <div class="card-value amber">6</div>
+      <div class="card-sub">Potencial de cierre en los próximos días</div>
+    </div>
+    <div class="card highlight">
+      <div class="card-label">Meta referencial</div>
+      <div class="card-value blue">4</div>
+      <div class="card-sub">Colocaciones el mes anterior — 40MM</div>
+    </div>
+  </div>
+
+  <!-- Progress mes anterior vs actual -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Mes anterior</span>
+      <strong>4 créditos · 40MM</strong>
+    </div>
+    <div class="progress-bar"><div class="progress-fill blue" style="width:100%"></div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Mayo (actual)</span>
+      <strong>3 vendidos + 6 en evaluación</strong>
+    </div>
+    <div class="progress-bar"><div class="progress-fill green" style="width:75%"></div></div>
+  </div>
+
+  <div class="callout green" style="margin-top:1.5rem">
+    <div class="callout-icon">📈</div>
+    <div class="callout-text">
+      Con <strong>6 solicitudes en evaluación</strong> y una semana restante, existe una alta probabilidad de <strong>superar las 4 colocaciones del mes anterior</strong>. El pipeline está activo y los resultados son alentadores.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CAMPAÑA 2 -->
+  <div class="section-label">Campaña 2</div>
+  <div class="section-title">Campaña No Clientes</div>
+  <div class="section-sub">Personas que cotizaron un crédito de consumo en el último mes pero no completaron el proceso. Primera campaña de este segmento.</div>
+
+  <div class="cards cards-2">
+    <div class="card highlight">
+      <div class="card-label">Universo contactado</div>
+      <div class="card-value blue">2.100</div>
+      <div class="card-sub">Personas con cotización sin completar</div>
+    </div>
+    <div class="card green">
+      <div class="card-label">Tasa de respuesta</div>
+      <div class="card-value green">15%</div>
+      <div class="card-sub">315 personas respondieron el mensaje</div>
+    </div>
+  </div>
+
+  <!-- Progress respuesta -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Tasa de respuesta sobre universo contactado</span>
+      <strong>315 / 2.100</strong>
+    </div>
+    <div class="progress-bar"><div class="progress-fill blue" style="width:15%"></div></div>
+  </div>
+
+  <div class="callout blue" style="margin-top:1.5rem">
+    <div class="callout-icon">💬</div>
+    <div class="callout-text">
+      Del <strong>15% que respondió</strong>, la <strong>mayoría manifestó interés</strong> en retomar el proceso de solicitud. Es un segmento de alta intención dado que ya habían iniciado una cotización de forma autónoma.
+    </div>
+  </div>
+
+  <div class="callout amber" style="margin-top:0.8rem">
+    <div class="callout-icon">🎯</div>
+    <div class="callout-text">
+      Esta campaña abre un <strong>canal nuevo de activación</strong> sobre un segmento no cliente — con tasas de respuesta que superan los benchmarks habituales de outreach en frío.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Generado por <strong>Relif</strong> · Mayo 2026 &nbsp;·&nbsp; Banco Internacional
+</footer>
+
+</body>
+</html>
